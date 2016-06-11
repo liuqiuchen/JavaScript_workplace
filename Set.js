@@ -123,6 +123,13 @@ function enumeration(namesToValues) {
         enumeration.values.push(e); // 将它存储到值数组中
     }
 
+    // 编写一个foreach方法，用来对类的实例进行迭代
+    enumeration.foreach = function (f, c) {
+        for(var i = 0;i < this.values.length;i++) {
+            f.call(c, this.values[i]);
+        }
+    };
+
     // 返回标志这个新类型的构造函数
     return enumeration;
 }
@@ -156,7 +163,9 @@ function inherit(p) {
     return new F();
 }
 
-
+var Coin = enumeration({Penny: 1, Nickel: 5, Dime: 10, Quarter: 25});
+var c = Coin.Dime;
+console.log(c instanceof Coin); // true
 
 
 
